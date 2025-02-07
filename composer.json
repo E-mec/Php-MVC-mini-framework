@@ -1,0 +1,16 @@
+{
+    "name": "exxon/php-mvc-framework",
+    "autoload": {
+        "psr-4": {
+            "Exxon\\PhpMvcFramework\\": "src/",
+            "App\\": "./"
+        }
+    },
+    "authors": [
+        {
+            "name": "Exxon Mecnix",
+            "email": "emecnix@gmail.com"
+        }
+    ],
+    "require": {}
+}
