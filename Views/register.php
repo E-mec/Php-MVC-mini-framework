@@ -2,32 +2,24 @@
     Register
 </h1>
 
-<form action="" method="post">
+<?php $form = \App\Core\form\Form::begin('', 'post') ; ?>
+
     <div class="row">
         <div class="col">
-            <div class="mb-3">
-                <label class="form-label">First Name</label>
-                <input type="text" class="form-control" name="fname">
-            </div>
+        <?php echo $form->field($model,'fName') ?>
         </div>
         <div class="col">
-            <div class="mb-3">
-                <label class="form-label">Last Name </label>
-                <input type="text" name="email" class="form-control">
-            </div>
+        <?php echo $form->field($model,'lName') ?>
         </div>
     </div>
-    <div class="mb-3">
-        <label class="form-check-label">Email</label>
-        <input type="email" name="email" class="form-control">
-    </div>
-    <div class="mb-3">
-        <label class="form-check-label">Password</label>
-        <input type="password" name="password" class="form-control">
-    </div>
-    <div class="mb-3">
-        <label class="form-check-label">Confirm Password</label>
-        <input type="password" name="c_password" class="form-control">
-    </div>
+    <?php echo $form->field($model,'email')->emailField() ?>
+    <?php echo $form->field($model,'password')->passwordField() ; ?>
+    <?php echo $form->field($model,'c_password')->passwordField() ; ?>
+
     <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+
+
+<?php \App\Core\form\Form::end() ; ?>
+
+
+   
