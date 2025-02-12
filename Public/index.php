@@ -6,7 +6,19 @@ use App\Core\Application;
 
 require_once __DIR__.'/../vendor/autoload.php';
 
-$app = new Application(dirname(__DIR__));
+$dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
+$dotenv->load();
+
+$config = [
+    'db' => [
+        'dsn' => $_ENV['DSN_DB'],
+        'user' => $_ENV['DSN_USER'],
+        'password' => $_ENV['DSN_PASSWORD'],
+    ]
+];
+
+
+$app = new Application(dirname(__DIR__), $config);
 
 $app->router->get('/', [SiteController::class, 'home']);
 
