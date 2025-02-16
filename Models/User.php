@@ -4,21 +4,24 @@ namespace App\Models;
 
 use App\Core\DbModel;
 use App\Core\Model;
+use App\Core\UserModel;
 
-class User extends DbModel
+class User extends UserModel
 {
     const STATUS_INACTIVE = 0;
     const STATUS_ACTIVE = 1;
     const STATUS_DELETED = 2;
 
+    public int $id ;
     public string $fName = '';
     public string $lName = '';
     public string $email = '';
     public int $status = self::STATUS_INACTIVE;
     public string $password = '';
     public string $c_password = '';
+    public string $created_at = '';
 
-    public function tableName(): string
+    public static function tableName(): string
     {
         return 'users';
     }
@@ -53,6 +56,11 @@ class User extends DbModel
         ];
     }
 
+    public static function primaryKey():string
+    {
+        return 'id';
+    }
+
     public function labels(): array
     {
         return [
@@ -63,5 +71,10 @@ class User extends DbModel
             'c_password' => 'Confirm Password',
             
         ];
+    }
+
+    public function getDisplayName(): string
+    {
+        return $this->fName.' '.$this->lName;
     }
 }
