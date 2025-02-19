@@ -9,6 +9,7 @@ class Application
 {
     public static string $basePath;
 
+    public string $layout = 'main';
     public string $userClass;
     public Request $request;
     public Response $response;
@@ -19,7 +20,7 @@ class Application
 
 
     public static Application $app;
-    public Controller $controller;
+    public ?Controller $controller = null;
     public function __construct($rootPath, array $config)
     {
         $this->userClass = $config['userClass'];
@@ -58,7 +59,14 @@ class Application
 
     public function run()
     {
-        echo $this->router->resolve();
+        try {
+            echo $this->router->resolve();
+        } catch (\Exception $th) {
+            $this->response->setStatusCode($th->getCode());
+            echo $this->router->renderView('_error', [
+                'exception' => $th
+            ]);
+        }
     }
 
     public function login(DbModel $user)
